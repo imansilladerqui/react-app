@@ -1,0 +1,42 @@
+@import "../../styles/variables.scss";
+
+.container {
+    animation: fadeIn 1.5s ease;
+    display: flex;
+    flex-direction: row;
+}
+
+.paginatorItem {
+    width: 2rem;
+    height: 2rem;
+    padding: 2rem;
+    margin: 0.5rem;
+    font-size: 1.4rem;
+    border-radius: 0.5rem;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $gris;
+    cursor: pointer;
+
+    &:hover {
+     background: $gris2;
+     color:$white
+    }
+}
+
+.paginatorItemActive {
+    width: 2rem;
+    height: 2rem;
+    padding: 2rem;
+    margin: 0.5rem;
+    font-size: 1.4rem;
+    border-radius: 0.5rem;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $gris5;
+    background-color: $gris4;
+}

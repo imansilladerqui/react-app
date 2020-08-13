@@ -1,0 +1,87 @@
+// Poppins
+@font-face {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: normal;
+    src: url("./assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "Poppins-Medium";
+    font-style: normal;
+    font-weight: normal;
+    src: url("./assets/fonts/Poppins/Poppins-Medium.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "Poppins-Bold";
+    font-style: normal;
+    font-weight: bold;
+    src: url("./assets/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+  }
+  
+  @font-face {
+    font-family: "Poppins-SemiBold";
+    font-style: normal;
+    font-weight: bold;
+    src: url("./assets/fonts/Poppins/Poppins-SemiBold.ttf") format("truetype");
+  }
+  
+  // Muli
+  
+  @font-face {
+    font-family: "Muli-Light";
+    font-style: normal;
+    font-weight: normal;
+    src: url("./assets/fonts/Muli/Muli-Light.ttf") format("truetype");
+  }
+  
+  @font-face {
+    font-family: "Muli-Regular";
+    font-style: normal;
+    font-weight: normal;
+    src: url("./assets/fonts/Muli/Muli-Regular.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "Muli-Medium";
+    font-style: normal;
+    font-weight: normal;
+    src: url("./assets/fonts/Muli/Muli-Medium.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "Muli-Bold";
+    font-style: normal;
+    font-weight: bold;
+    src: url("./assets/fonts/Muli/Muli-Bold.ttf") format("truetype");
+  }
+  
+  @font-face {
+    font-family: "Muli-SemiBold";
+    font-style: normal;
+    font-weight: bold;
+    src: url("./assets/fonts/Muli/Muli-SemiBold.ttf") format("truetype");
+  }
+  
+  @font-face {
+    font-family: "Muli-ExtraBold";
+    font-style: normal;
+    font-weight: bold;
+    src: url("./assets/fonts/Muli/Muli-ExtraBold.ttf") format("truetype");
+  }
+  
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  html {
+    overflow-x: hidden;
+    font-size: 62.5%;
+    box-sizing: border-box;
+  }
+  body {
+    background-color: white;
+  }

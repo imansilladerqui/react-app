@@ -1,0 +1,12 @@
+@import "../../styles/animations.scss";
+.container {
+  animation: fadeIn 0.5s ease;
+  box-sizing: border-box;
+  flex: 1 83%;
+  padding: 1.5rem;
+  padding-left: 3.8rem;
+  width: 100%;
+  position: relative;
+  background-color: var(--main-background);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+}
