@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {connect} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {getHabitants,setPage, setOffset} from "../../store/actions/general-actions";
 import HeaderLayout from '../../components/header/header-layout';
 import MainLayout from "../../components/main/main-layout";
@@ -9,18 +9,21 @@ import PaginatorLayout from "../../components/paginator/paginator-layout";
 import Paginator from "../paginator/paginator";
 import { useMediaQuery } from "react-responsive";
 
-const Home = (props) => {
+const Home = () => {
 
+    const dispatch = useDispatch();
+
+    const state = useSelector((state) => state);
     const isMobile = useMediaQuery({ query: "(max-width: 959px)" });
     const responsiveOffset = (isMobile) ? 10 : 20;
 
     useEffect(() => {
-        props.getHabitants();
-        props.setOffset(responsiveOffset)
+        dispatch(getHabitants());
+        dispatch(setOffset(responsiveOffset))
       },[]);
 
     const handleSetPage=(page)=>{
-      props.setPage(page)
+        dispatch(setPage(page))
     }
 
     return (
@@ -28,34 +31,21 @@ const Home = (props) => {
         <HeaderLayout/>
         <MainLayout>
             <PaginatorLayout>
-              <Paginator totalItems={props.totalItems} page={props.page} offset={props.offset} handleSetFilterPage={(e)=>handleSetPage(e)}/>
+              <Paginator totalItems={state.totalItems} page={state.page} offset={state.offset} handleSetFilterPage={(e)=>handleSetPage(e)}/>
             </PaginatorLayout>
             <CardsLayout>
               {
-                props.habitants.slice(((props.page-1)*props.offset),(((props.page-1)*props.offset)+props.offset)).map((data, index)=> {
+                state.habitants.slice(((state.page-1)*state.offset),(((state.page-1)*state.offset)+state.offset)).map((data, index)=> {
                   return <Cards key={index} habitants={data}/>
                 })
               }
             </CardsLayout>
             <PaginatorLayout>
-              <Paginator totalItems={props.totalItems} page={props.page} handleSetFilterPage={(e)=>handleSetPage(e)}/>
+              <Paginator totalItems={state.totalItems} page={state.page} handleSetFilterPage={(e)=>handleSetPage(e)}/>
             </PaginatorLayout>
         </MainLayout>
       </>
     );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    habitants: state.general.habitants,
-    totalItems: state.general.totalItems,
-    page: state.general.page,
-    offset: state.general.offset
-  };
-};
-
-export default connect(mapStateToProps, {
-    getHabitants,
-    setPage,
-    setOffset,
-})(Home);
+export default Home;

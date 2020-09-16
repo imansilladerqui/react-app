@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {connect} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {getHabitants, setFilteredHabitants, setPage} from "../../store/actions/general-actions";
 import HeaderLayout from '../../components/header/header-layout';
 import MainLayout from "../../components/main/main-layout";
@@ -14,20 +14,23 @@ const queryString = require('query-string');
 
 const Filter = (props) => {
 
+    const state = useSelector((state) => state);
+    const dispatch = useDispatch();
+
     let filtered = queryString.parse(props.location.search);
     let wantedKey = Object.keys(filtered)[0];
     let wantedValue = filtered[wantedKey];
 
     useEffect(() => {
-      if(isEmpty(props.location.search) || isEmpty(props.habitants)) {
+      if(isEmpty(props.location.search) || isEmpty(state.habitants)) {
           return props.history.push('/');
         }
-        props.getHabitants();
+        dispatch(getHabitants());
         getFilteredHabitants(wantedKey, wantedValue);
     },[props.location.search]);
 
     const getFilteredHabitants = (wantedKey, wantedValue) => {
-      let result = props.habitants.filter((data)=> {
+      let result = state.habitants.filter((data)=> {
         switch (wantedKey) {
           case 'professions':
           case 'friends':
@@ -49,11 +52,11 @@ const Filter = (props) => {
             }
         }
       });
-      props.setFilteredHabitants(result);
+      dispatch(setFilteredHabitants(result));
     }
 
     const handleSetPage=(page)=>{
-      props.setPage(page)
+      dispatch(setPage(page))
     }
 
     return (
@@ -61,24 +64,24 @@ const Filter = (props) => {
         <HeaderLayout/>
         <MainLayout>
           {
-            (props.filteredHabitants.length > 20) &&
+            (state.filteredHabitants.length > 20) &&
             <PaginatorLayout>
-              <Paginator totalItems={props.totalFilteredItems} page={props.page} handleSetFilterPage={(e)=>handleSetPage(e)}/>
+              <Paginator totalItems={state.totalFilteredItems} page={state.page} handleSetFilterPage={(e)=>handleSetPage(e)}/>
             </PaginatorLayout>
           }
           <h3>This are all the gnomes that have: {wantedKey}</h3>
           <p>{wantedValue}</p>
           <CardsLayout>
             {
-              props.filteredHabitants.slice(((props.page-1)*props.offset),(((props.page-1)*props.offset)+props.offset)).map((data, index)=> {
+              state.filteredHabitants.slice(((state.page-1)*state.offset),(((state.page-1)*state.offset)+state.offset)).map((data, index)=> {
                 return <Cards key={index} habitants={data}/>
               })
             }
           </CardsLayout>
           {
-            (props.filteredHabitants.length > 20) &&
+            (state.filteredHabitants.length > 20) &&
             <PaginatorLayout>
-              <Paginator totalItems={props.totalFilteredItems} page={props.page} handleSetFilterPage={(e)=>handleSetPage(e)}/>
+              <Paginator totalItems={state.totalFilteredItems} page={state.page} handleSetFilterPage={(e)=>handleSetPage(e)}/>
             </PaginatorLayout>
           }
             
@@ -87,19 +90,6 @@ const Filter = (props) => {
     );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    habitants: state.general.habitants,
-    totalItems: state.general.totalItems,
-    totalFilteredItems: state.general.totalFilteredItems,
-    page: state.general.page,
-    offset: state.general.offset,
-    filteredHabitants: state.general.filteredHabitants
-  };
-};
 
-export default connect(mapStateToProps, {
-    getHabitants,
-    setFilteredHabitants,
-    setPage
-})(Filter);
+
+export default Filter;
